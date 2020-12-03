@@ -1,52 +1,42 @@
+const { count } = require("console");
 var fs = require("fs");
-var text = fs.readFileSync("./input_2020_Q2.txt", "utf8");
+const { parserConfiguration } = require("yargs");
+var text = fs.readFileSync("./input_2020_Q3.txt", "utf8");
 let output = text.split("\n");
-let min, max, hits = 0;
-let char = '';
-let pass = 0;
-let valid = 0;
-let valid2 = 0;
 
+console.log(output);
 
-for(i = 0; i < output.length; i++){
-    let first = output[i].indexOf("-");
-    min = output[i].substring(0, (first));
-    let second = output[i].indexOf(":");
-    max = output[i].substring(first+1, second-first);
+let size = 11;
 
-    char = output[i].charAt(second - 1);
+let right = 3;
+let down = 1;
+let x = 0;
+let y = 0;
+
+let counter = 0;
+let rightBoundary = output[0].length; 
+console.log(rightBoundary);
+let bottomRow = output.length;
+console.log(bottomRow);
+
+while (y < bottomRow){
+    let hit = output[y].charAt(x);
+    if (hit === '#'){
+        counter++;
+    }
+
+    console.log(output[y], x, y, hit, counter);
     
-    for(j = 7; j < output[i].length; j++){
-        if (output[i].charAt(j)==char){
-            hits++;
-        }
+    x += right;
+    y += down;
+    if (x>rightBoundary){
+        x -= rightBoundary;
     }
-    
-    if ((hits >= min) && (hits <=max)){
-        pass = 1;
-    }
-    
-    if (pass){
-        valid++;
-    }
-
-    let pos1 = parseInt(min) + parseInt(second) + 1;
-    let charpos1 = output[i].charAt(pos1);
-
-    let pos2 = parseInt(max) + parseInt(second) + 1;
-    let charpos2 = output[i].charAt(pos2);
-
-    if (((charpos1===char)+(charpos2===char))===1){
-        valid2++;
-    }
-
-    pass = 0;
-    hits = 0;
 
 }
-console.log("Valid passwords = " + valid);
-console.log("Valid2 passwords = " + valid2);
+for(y = 0; output.length; y++){
+    console.log(output[y] + " " + y);
+}
+console.log(counter);
 
-//660 part 1
-//530 part 2
-
+//not 145 too low
