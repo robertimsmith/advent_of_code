@@ -1,85 +1,52 @@
-/*BFFFBBFRRR: row 70, column 7, seat ID 567.
-FFFBBBFRRR: row 14, column 7, seat ID 119.
-BBFFBBFRLL: row 102, column 4, seat ID 820.*/
-
 var fs = require("fs");
-var text = fs.readFileSync("./input_2020_Q5.txt", "utf8");
-let output = text.split("\n");
-let j = 0;
-let test1 = ["BFFFBBFRRR", "FFFBBBFRRR", "BBFFBBFRLL"];
-//0 - 127, highest seat number?
-let input = output;
-maxSeat = 127*8+7;
-let max = 0;
+var text = fs.readFileSync("./input_2020_Q6.txt", "utf8");
+let output = text.split("\n\n");
 
-var seatList = new Array(maxSeat);
+let i = 0;
+let counter = 0;
 
-for (j = 0; j < maxSeat; j++){
-    seatList[j] = 0;
+for (i = 0; i < output.length; i++ ){
+    output[i].replace(/\W/gi, '');
+    counter += readGroup(output[i]);
 }
 
+console.log("FINAL COUNT = " + counter);
 
-for (j = 0; j < input.length; j++){
-    //console.log(j, input[j], input.length);
-    seat = rowFinder(input[j]);
-    //console.log(seat);
-    if (seat > max){
-        max = seat;
-    }
-    seatList[seat] = 1;
-    //seatList[seat-1] = 1;
-    //seatList[seat+1] = 1;
 
-}
-console.log("Highest seat is " + max);
-//console.log(maxSeat);
 
-for (j = 80; j < 927; j++){
-    if (seatList[j] === 0){
-        console.log("Empty seat " + j);
-    }
-}
-function rowFinder(rowString){
+function readGroup(string){
+    console.log("Looking at " + string);
     let i = 0;
-    let low = 0;
-    let high = 127;
-    let left = 0;
-    let right = 7;
+    let count = 0;
+    var flag = Array(26);
+    let lines = string.split(/\r\n|\r|\n/).length
     
+    console.log("It has lines = " + lines);
 
-    for (i = 0; i <= 6; i++){
-//        console.log(i, rowString[i]);
-        let char = rowString[i];
-        let difference = Math.round((high - low)/2);
-        if (char === "B"){
-            low += difference;
-        }
-        if (char === "F"){
-            high -= difference;
-        }
-//        console.log("Low=  " + low + " High= " + high);
+    for (i = 0; i < flag.length; i++){
+        flag[i] = 0;
     }
 
-    for (i = 7; i <= 9; i++){
-//        console.log(i, rowString[i]);
-        let char = rowString[i];
-        let difference = Math.round((right - left)/2);
-        if (char === "R"){
-            left += difference;
+    // a ascii = 97, z = 122
+    for (i = 0; i < string.length; i++){
+        if ((string.charCodeAt(i)>= 97) && (string.charCodeAt(i) <= 122)){
+            //console.log("Character " + string.charAt(i) + " of " + string + " has value " + string.charCodeAt(i));
+            //console.log("Making flag " + (string.charCodeAt(i) - 97) + " as 1");
+            flag[(string.charCodeAt(i) - 97)]++;
+            //console.log("Flag is " + flag);
         }
-        if (char === "L"){
-            right -= difference;
-        }
- //       console.log("Left=  " + left + " Right= " + right);
     }
+    
 
+    for (i = 0; i < flag.length; i++){
+        if (flag[i] === lines){
+            count++;
+        }
+    } 
     
-    let result = high.toString() + " " + right.toString();
-    let seat = high * 8 + right
-    //console.log(high + " " + right + " " + seat);
-    
-    return(seat);
+    console.log(count);
+    return count;
 }
 
-// part 1 = 926
-// part 2 926 is too high
+//part 1 = 6633
+//part 2 = 3202
