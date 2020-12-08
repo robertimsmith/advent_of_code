@@ -1,11 +1,11 @@
 
 var fs = require("fs");
-var text = fs.readFileSync("./input_2020_Q7.txt", "utf8");
+var text = fs.readFileSync("./input_2020_Q7_test.txt", "utf8");
 let output = text.split("\n");
 let size = output.length;
 let i,j, k, l, m = 0;
 let searchFor = ["shinygold"];
-let counter = 1;
+let counter = 0;
 
 /*light red bags contain 1 bright white bag, 2 muted yellow bags.
 dark orange bags contain 3 bright white bags, 4 muted yellow bags.
@@ -62,11 +62,14 @@ for (i = 0; i < output.length; i++){
                 let stringText = output[i].replace(/\s/g, '');
                 console.log("Matcher is " + matcher + " StringText is " + stringText);
                 console.log (stringText);
-                let bagString = stringText.indexOf(matcher);
-                let value = stringText.substr(parseInt(matcher)-2, 3);
-                console.log("Bagstring is " + bagString);
-                console.log(value);
+                let bagString = stringText.substring(stringText.indexOf(matcher)-3);
+                bagString = bagString.replace(/[^\d]/g, '')
+                let value = parseInt(bagString);
+                counter += value;
                 
+                console.log("Bagstring is " + bagString);
+                console.log("Value is " + value);
+                console.log("Counter = " + counter);
                 //console.log("SearchFor= " + searchFor);
             }
         }
@@ -125,3 +128,4 @@ function cleanit(input){
 }
 
 //part 1 is 257
+//part 2 1668837 is too high
