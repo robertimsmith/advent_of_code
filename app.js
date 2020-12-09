@@ -1,107 +1,97 @@
+
 var fs = require("fs");
-const { array } = require("yargs");
-var text = fs.readFileSync("./input_2020_Q8.txt", "utf8");
+var text = fs.readFileSync("./input_2020_Q9.txt", "utf8");
 let output = text.split("\n");
 let size = output.length;
-let i,j, k, l, m = 0;
-var flag = new Array();
-var acc = 0; 
-var command = 0;
-let change = 0;
+var lastCode;
+var i, j, k, l;
+let partOne = 0;
 
-for (i = 0; i < size; i++){
-    flag[i] = 0;
-    //console.log(i, flag[i]);
+if (size === 20){
+    lastCode = 5;
 }
+else lastCode = 25;
 
-//console.log(output);
-//console.log(flag);
+console.log(lastCode);
 
-for (j = 0; j < size; j++){
-    execute(j);
-}
+main();
 
 
-
-console.log("ACCUMULATOR= " + acc);
-
-function parse(command, commandChange){
-    let instruction = output[command].substr(0,3);
-    let value = parseInt(output[command].substr(4,4));
-    if (instruction === size){
-        console.log("TERMINATED!!!!!");
-        console.log("ACC = " + acc);
-        return -1;
+function main(){
+    for (i =lastCode; i<size; i++){
+        if (check(i) === 0){
+            partOne = parseInt(output[i]);
+            console.log("Part 1 Entry " + i + " with VALUE " + partOne);
+        };
 
     }
-    if (flag[command] === 1){
-        //console.log("Command has been run = " + command + " failed with " + j + "*********");
-        return -1;
-    }
-    flag[command] = 1;
+
+check2(i);
 
 
-    //console.log("CommandChange " + commandChange + " command= " + command + " change = " + change);
-    if ((commandChange == command) && (change == 0)){
-        if (instruction == "nop"){
-            instruction = "jmp";
-            change = 1;
-            //console.log("SWITCHING " + command + " to JMP **********");
-        }
-        else if (instruction == "jmp"){
-        instruction = "nop";
-        change = 1;
-        //console.log("SWITCHING " + command + " to NOP   **********");
+}
+
+function check(value){
+    let checkValue = parseInt(output[value]);
+    for (j = value - lastCode; j < value; j++){
+        for (k = j + 1; k < value; k++){
+            let total = parseInt(output[j]) + parseInt(output[k]);
+            //console.log(j, k, total, checkValue);
+            if (total === checkValue){
+                //console.log("MATCH FOUND");
+                return 1;
+            }
         }
     }
+    
+    console.log("MATCH NOT FOUND");
+    return 0;
 
-
-
-
-    //console.log("instruction = " + instruction);
-    //console.log("value = " + value);
-
-    if (instruction === "nop"){
-        //console.log("NOP");
-        return (command+1);
-    }
-
-    if (instruction === "acc"){  
-        acc += value;
-        //console.log("ACC" + " value= " + value + " ACC= " + acc);
-        return (command+1);
-    }
-
-    if (instruction === "jmp"){
-        command += value;
-        //console.log("JMP" + " value= " + value + " COMMAND= " + command);
-        return (command);
-    }
 }
 
 
-function execute(commandChange){
-    command = 0;
-    acc = 0;
-    change = 0;
-
-    for (i = 0; i < size; i++){
-        flag[i] = 0;
-        //console.log(i, flag[i]);
-    }
-    //console.log("RUNNING WITH CHANGE to " + commandChange);
-
-    while (command >= 0 ){
-        //console.log("\nCOMMAND " + command);
-        if (command >= size){
-            console.log("TERMINATED!!!!!");
-            console.log("ACC = " + acc);
-            break;
+function check2(value){
+    let checkValue = parseInt(output[value]);
+    for (j = 0; j < size; j++){
+        let total = parseInt(output[j]);
+        for (k = j + 1; k < size; k++){
+            total += parseInt(output[k]);
+            //console.log(i, j, k, total);
+            //console.log(j, k, total);
+            if (total === partOne){
+                let partTwo = weakness(j, k);
+                console.log("MATCH FOUND " + partTwo);
+                return 1;
+            }
         }
-        command = parse(command, commandChange);
-        //console.log("RETURNS " + command); 
-        //console.log("ACCUMULATOR= " + acc);    
     }
+    
+    //console.log("MATCH NOT FOUND");
+    //console.log(j, k, checkValue);
+    return 0;
+
 }
-//part 1 is 1584
-//part 2 is 920
+function weakness(j, k){
+    let smallest = parseInt(output[j]);
+    let biggest = parseInt(output[j]);
+    //console.log("SMALLEST = " + smallest + " BIGGEST = " + biggest);
+
+    for (l = j; l <=k; l++){
+        if (parseInt(output[l])>biggest)
+            {
+                biggest = parseInt(output[l]);
+            }
+            
+        if (parseInt(output[l])<smallest)
+            {
+                smallest = parseInt(output[l]);
+            }
+        }
+        console.log("SMALLEST = " + smallest + " BIGGEST = " + biggest + " TOTAL = " + (smallest+biggest));
+        return (smallest+biggest);
+    }
+    
+
+//part 1 is 57195069
+//part 2 is 7409241
+
