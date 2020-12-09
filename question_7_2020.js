@@ -1,11 +1,19 @@
 
 var fs = require("fs");
+const { connect } = require("http2");
 var text = fs.readFileSync("./input_2020_Q7_test.txt", "utf8");
 let output = text.split("\n");
 let size = output.length;
 let i,j, k, l, m = 0;
-let searchFor = ["shinygold"];
+let searchFor = ["shiny gold"];
 let counter = 0;
+var first = new Array();
+var second = new Array();
+var third = new Array();
+var fourth = new Array();
+var fifth = new Array();
+var commas = 0;
+var added = 1;
 
 /*light red bags contain 1 bright white bag, 2 muted yellow bags.
 dark orange bags contain 3 bright white bags, 4 muted yellow bags.
@@ -18,114 +26,168 @@ faded blue bags contain no other bags.
 dotted black bags contain no other bags.
 */
 
-//console.log(output);
-let flag = 0;
-do {
-    flag = searchFor.length;
-for (i = 0; i < output.length; i++){
-    console.log("\nProcessing " + output[i] + " " + i);
-    checkList = [];
-    first = cleanit(readFirst(output[i]));
-    newString = (output[i].substring(output[i].indexOf("contain")+8));
-    //console.log("NEWSTRING= " + newString);
-    //console.log(newString.indexOf("no other bags"));
+console.log(output);
 
-    if (newString.indexOf("no other bags") < 0){
-        let commas = (newString.match(/,/g) || []).length;
-        //console.log("COMMAS = " + commas);
-        for (j = 0; j < commas; j++){
-            let nextString = newString.substr(0, newString.indexOf(","));
-            checkList.push(nextString);
-            //console.log("PUSHING nextstring" + nextString );
-            newString = newString.substr(newString.indexOf(",")+1);
-        }
-        checkList.push(newString);
-        //console.log("PUSHING newstring" + newString);
-    }
-    //console.log("Checklist= " + checkList);
-    for (k = 0 ; k < checkList.length; k++){
-        checkList[k] = cleanit(checkList[k]);
-    }
-    //console.log("Cleaned checklist= " + checkList);
-    //console.log("SearchFor = " + searchFor);
-    //console.log("Checklist = " + checkList);
+for (i = 0; i <output.length; i++){ 
+    commas = (output[i].split(",").length - 1);
+    first.push(processFirst(output[i]));
+    second.push(processSecond(output[i]));
+    if (commas >= 1){
+        third.push(processThird(output[i]));
+    } else third.push("");
+    
+    if (commas >= 2){
+        fourth.push(processFourth(output[i]));
+    } else fourth.push("");
 
-    for (l = 0 ; l < checkList.length; l++){
-        for (m = 0; m < searchFor.length; m++){
-            //console.log("L= " + l + "Checklist= " +checkList[l] + " M= " + m + " searchFor = " + searchFor[m]);
-            if (checkList[l] === searchFor[m]){
-                searchFor.push(first);
-                console.log("Pushing first " + first);
-                console.log(output[i]);
-                console.log(checkList[l]);
-                let matcher = checkList[l];
-                let stringText = output[i].replace(/\s/g, '');
-                console.log("Matcher is " + matcher + " StringText is " + stringText);
-                console.log (stringText);
-                let bagString = stringText.substring(stringText.indexOf(matcher)-3);
-                bagString = bagString.replace(/[^\d]/g, '')
-                let value = parseInt(bagString);
-                counter += value;
+    if (commas >= 3){
+        fifth.push(processFifth(output[i]));
+    }   else fifth.push(""); 
+    
+}
+
+while(added === 1){
+    added = 0;
+    let sizeSearchFor = searchFor.length;
+
+    for (i = 0; i < searchFor.length; i++){
+        for (j = 0 ; j < size; j++){
+            //console.log("\n" + first[j] + " ; " + second[j] + " ; " + third[j] + " ; "+ fourth[j] + " ; "+ fifth[j] + " ; ");
+
+            //console.log("Is " + searchFor[i] + " in " + second[j]+ " or " + third[j]+ " or " + fourth[j]+ " or " + fifth[j]);
+            if (second[j].includes(searchFor[i]) || (third[j].includes(searchFor[i]))
+            || (fourth[j].includes(searchFor[i]))||(fifth[j].includes(searchFor[i]))){
                 
-                console.log("Bagstring is " + bagString);
-                console.log("Value is " + value);
-                console.log("Counter = " + counter);
-                //console.log("SearchFor= " + searchFor);
+                let check = isAlreadyThere(first[j]);
+                //console.log("CHECK = " + check);
+                
+                if (check === 0){
+                    console.log(searchFor[i] + " is in " + second[j]);
+                    searchFor.push(first[j]);
+                    //console.log("PUSHING" + first[j]);
+                    //searchFor = [...new Set(searchFor)];
+                    add = 1;
+                }
+            
+                
             }
         }
     }
 }
-//console.log("Compare = " + searchFor);
-//console.log("Flag= " + flag);
-searchFor = [...new Set(searchFor)];
-//console.log("Compare = " + searchFor);
-}while(flag != searchFor.length);
-
-searchFor = cleanup(searchFor);
-uniques = [...new Set(searchFor)];
+console.log("SEARCH FOR " + searchFor);
+console.log("ANSWER 1 = " + (searchFor.length - 1));
 
 
-let answer = parseInt(uniques.length) - 1;
-console.log("Number of matches = " + answer);
-
-function readFirst(text){
-    first = text.substr(0,text.indexOf("contain"));    
-    return first;
-}
-
-function readMore(text){
-    result = "EMPTY";
-    if (text.indexOf("no other bags")>0){
-        return result;
+for (i = 0; i < searchFor.length; i++){
+    for (j = 0 ; j < size; j++){
+        if (second[j].includes(searchFor[i])){
+            myString = (second[j].replace(/\D/g,''));
+            counter += parseInt(myString);
+        }
+        if (third[j].includes(searchFor[i])){
+            myString = (third[j].replace(/\D/g,''));
+            counter += parseInt(myString);
+        }
+        if (fourth[j].includes(searchFor[i])){
+            myString = (fourth[j].replace(/\D/g,''));
+            counter += parseInt(myString);
+        }
+        if (fifth[j].includes(searchFor[i])){
+            myString = (fifth[j].replace(/\D/g,''));
+            counter += parseInt(myString);
+        }
     }
-    //console.log("CHECKING " + text);
-    second = text.substr(text.indexOf("contain")+9);
-    //console.log("Second = " + second);
-    return (second);
 }
 
-function cleanup(input){
-    for ( i=0; i<input.length;i++ ){
-        input[i] = input[i].replace(/\d/g,'');
-        input[i] = input[i].replace(/\s/g, '');
-        input[i] = input[i].replace('.', '');
-        input[i] = input[i].replace('bags', '');
-        input[i] = input[i].replace('bag', '');
-        //console.log(i, searchFor[i]);
+console.log("COUNT = " + counter);
+
+counter = 0;
+for (i = 0; i < searchFor.length; i++){
+    for (j = 0 ; j < size; j++){
+        if (first[j].includes(searchFor[i])){
+            
+            console.log(first[j] + " is in " + output[j]);
+
+            myString = (second[j].replace(/\D/g,''));
+            if (myString) {counter += parseInt(myString);console.log(first[j], myString);}
+            myString = (third[j].replace(/\D/g,''));
+            if (myString) {counter += parseInt(myString);console.log(first[j], myString);}
+            myString = (fourth[j].replace(/\D/g,''));
+            if (myString) {counter += parseInt(myString);console.log(first[j], myString);}
+            myString = (fifth[j].replace(/\D/g,''));
+            if (myString) {counter += parseInt(myString);console.log(first[j], myString);}
+        }
     }
-    return input;
+}
+console.log("COUNT = " + counter);
+
+
+function isAlreadyThere(string){
+    for (k = 0; k < searchFor.length; k++){
+        //console.log(k, string, searchFor[k]);
+        if (string === searchFor[k]){
+            return 1;
+        }
+    }
+    return 0;
 }
 
-function cleanit(input){
+function processFirst(input){
+    var containPos = input.indexOf("contain");
+    var returnString = (input.substr(0, containPos-6));
+    
+    return returnString;
+}
+
+function processSecond(input){
+    var containPos = input.indexOf("contain");
+    var endPos = input.indexOf(",");
+    if (endPos === -1){
+        endPos = input.indexOf(".");
+    }
+    var returnString = input.substr(containPos + 8, endPos-containPos-8);
+    return returnString;
+}
+
+function processThird(input){
+    var commaPos = input.indexOf(",");
+    var endPos = input.indexOf(",", commaPos+1);
+
+    if (endPos === -1){
+        endPos = input.indexOf(".");
+    }
+    var returnString = input.substr(commaPos+2, endPos-commaPos-2);//endPos-commaPos-4
  
-    input = input.replace(/\d/g,'');
-    input = input.replace(/\s/g, '');
-    input = input.replace('.', '');
-    input = input.replace('bags', '');
-    input = input.replace('bag', '');
+    return returnString;
+}
 
-    return input;
+function processFourth(input){
+    var commaPos = input.indexOf(",");
+    commaPos = input.indexOf(",", commaPos+1);
+    var endPos = input.indexOf(",", commaPos+1);
+
+    if (endPos === -1){
+        endPos = input.indexOf(".");
+    }
+    var returnString = input.substr(commaPos+2, endPos-commaPos-2);//endPos-commaPos-4
+ 
+    return returnString;
+}
+
+function processFifth(input){
+    var commaPos = input.indexOf(",");
+    commaPos = input.indexOf(",", commaPos+1);
+
+    commaPos = input.indexOf(",", commaPos+1);
+    var endPos = input.indexOf(",", commaPos+1);
+
+    if (endPos === -1){
+        endPos = input.indexOf(".");
+    }
+    var returnString = input.substr(commaPos+2, endPos-commaPos-2);//endPos-commaPos-4
+ 
+    return returnString;
 }
 
 //part 1 is 257
-//part 2 1668837 is too high
+//part 2 136869 is too high, 1061 is not the right answer
