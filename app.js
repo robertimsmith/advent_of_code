@@ -22,7 +22,7 @@ function main2(){
         }
     }
     for (y = 0; y < size; y++){
-        console.log(input[y]);
+        //console.log(input[y]);
     }
 
     for (i = 0; i < size; i++){
@@ -41,7 +41,7 @@ function main2(){
     }
     console.log("UNOCCUPIED RESULTS: ");
     for (y = 0; y < size; y++){
-        console.log(input[y]);
+       console.log(input[y]);
     }
 
     for (i = 0; i < size; i++){
@@ -79,7 +79,7 @@ function main2(){
 }
     //console.log("Output is " + output);
     for (y = 0; y < size; y++){
-            console.log(input[y]);
+            //console.log(input[y]);
         }
     
 }
@@ -87,9 +87,9 @@ function main2(){
 
 function checkUnOccupiedTwo(checkY, checkX){
     var counter = 0;
+    scenarioChar = "";
     scenarioDirectionX = -1;
     scenarioDirectionY = -1;
-    
     scenarioX = checkX;
     scenarioY = checkY;
     flag =1;
@@ -105,10 +105,9 @@ function checkUnOccupiedTwo(checkY, checkX){
         if (scenarioChar === "#"){counter++; break;}
         if (scenarioChar === "L"){break;}
     }
-    
+    scenarioChar = "";
     scenarioDirectionX = -1;
     scenarioDirectionY = 0;
-    
     scenarioX = checkX;
     scenarioY = checkY;
     flag =1;
@@ -123,61 +122,9 @@ function checkUnOccupiedTwo(checkY, checkX){
         scenarioChar = output[scenarioY].charAt(scenarioX);
         if (scenarioChar === "#"){counter++; break;}
         if (scenarioChar === "L"){break;}
-    }    
-    scenarioDirectionX = -1;
-    scenarioDirectionY = 1;
+    } 
     
-    scenarioX = checkX;
-    scenarioY = checkY;
-    flag =1;
-    while (flag = 1){
-        scenarioX += scenarioDirectionX;
-        scenarioY += scenarioDirectionY;
-    
-        if ((scenarioX < 0 ) || (scenarioX >= width) || (scenarioY < 0) || (scenarioY >= size)){
-            //console.log("Hit Boundary" , scenarioY , scenarioX);
-            break;
-        }
-        scenarioChar = output[scenarioY].charAt(scenarioX);
-        if (scenarioChar === "#"){counter++; break;}
-        if (scenarioChar === "L"){break;}
-    }    
-    scenarioDirectionX = -1;
-    scenarioDirectionY = 0;
-    
-    scenarioX = checkX;
-    scenarioY = checkY;
-    flag =1;
-    while (flag = 1){
-        scenarioX += scenarioDirectionX;
-        scenarioY += scenarioDirectionY;
-    
-        if ((scenarioX < 0 ) || (scenarioX >= width) || (scenarioY < 0) || (scenarioY >= size)){
-            //console.log("Hit Boundary" , scenarioY , scenarioX);
-            break;
-        }
-        scenarioChar = output[scenarioY].charAt(scenarioX);
-        if (scenarioChar === "#"){counter++; break;}
-        if (scenarioChar === "L"){break;}
-    }    
-    scenarioDirectionX = 1;
-    scenarioDirectionY = 0;
-    
-    scenarioX = checkX;
-    scenarioY = checkY;
-    flag =1;
-    while (flag = 1){
-        scenarioX += scenarioDirectionX;
-        scenarioY += scenarioDirectionY;
-    
-        if ((scenarioX < 0 ) || (scenarioX >= width) || (scenarioY < 0) || (scenarioY >= size)){
-            //console.log("Hit Boundary" , scenarioY , scenarioX);
-            break;
-        }
-        scenarioChar = output[scenarioY].charAt(scenarioX);
-        if (scenarioChar === "#"){counter++; break;}
-        if (scenarioChar === "L"){break;}
-    }    
+    scenarioChar = "";
     scenarioDirectionX = -1;
     scenarioDirectionY = 1;
     
@@ -195,7 +142,29 @@ function checkUnOccupiedTwo(checkY, checkX){
         scenarioChar = output[scenarioY].charAt(scenarioX);
         if (scenarioChar === "#"){counter++; break;}
         if (scenarioChar === "L"){break;}
-    }    
+    } 
+    
+    scenarioChar = "";
+    scenarioDirectionX = -1;
+    scenarioDirectionY = 0;
+    
+    scenarioX = checkX;
+    scenarioY = checkY;
+    flag =1;
+    while (flag = 1){
+        scenarioX += scenarioDirectionX;
+        scenarioY += scenarioDirectionY;
+    
+        if ((scenarioX < 0 ) || (scenarioX >= width) || (scenarioY < 0) || (scenarioY >= size)){
+            //console.log("Hit Boundary" , scenarioY , scenarioX);
+            break;
+        }
+        scenarioChar = output[scenarioY].charAt(scenarioX);
+        if (scenarioChar === "#"){counter++; break;}
+        if (scenarioChar === "L"){break;}
+    }  
+    
+    scenarioChar = "";
     scenarioDirectionX = 1;
     scenarioDirectionY = 0;
     
@@ -213,7 +182,49 @@ function checkUnOccupiedTwo(checkY, checkX){
         scenarioChar = output[scenarioY].charAt(scenarioX);
         if (scenarioChar === "#"){counter++; break;}
         if (scenarioChar === "L"){break;}
-    }    
+    } 
+    
+    scenarioChar = "";
+    scenarioDirectionX = -1;
+    scenarioDirectionY = 1;
+    
+    scenarioX = checkX;
+    scenarioY = checkY;
+    flag =1;
+    while (flag = 1){
+        scenarioX += scenarioDirectionX;
+        scenarioY += scenarioDirectionY;
+    
+        if ((scenarioX < 0 ) || (scenarioX >= width) || (scenarioY < 0) || (scenarioY >= size)){
+            //console.log("Hit Boundary" , scenarioY , scenarioX);
+            break;
+        }
+        scenarioChar = output[scenarioY].charAt(scenarioX);
+        if (scenarioChar === "#"){counter++; break;}
+        if (scenarioChar === "L"){break;}
+    }  
+    
+    scenarioChar = "";
+    scenarioDirectionX = 1;
+    scenarioDirectionY = 0;
+    
+    scenarioX = checkX;
+    scenarioY = checkY;
+    flag =1;
+    while (flag = 1){
+        scenarioX += scenarioDirectionX;
+        scenarioY += scenarioDirectionY;
+    
+        if ((scenarioX < 0 ) || (scenarioX >= width) || (scenarioY < 0) || (scenarioY >= size)){
+            //console.log("Hit Boundary" , scenarioY , scenarioX);
+            break;
+        }
+        scenarioChar = output[scenarioY].charAt(scenarioX);
+        if (scenarioChar === "#"){counter++; break;}
+        if (scenarioChar === "L"){break;}
+    } 
+    
+    scenarioChar = "";
     scenarioDirectionX = 1;
     scenarioDirectionY = 1;
     
@@ -238,7 +249,7 @@ function checkUnOccupiedTwo(checkY, checkX){
     //console.log("COUNTER= " + counter, y, x);
 
     //console.log("UNCOPPIED CHECK " + counter, y, x, input[y].charAt(x));
-    if ((counter >= 5 )&& (input[y].charAt(x) === '#')){
+    if ((counter >= 5 ) && (output[y].charAt(x) === '#')){
         //console.log("STAND UP AT " + y,x,input[y].charAt(x));
         //console.log("CHANGING to L");
         input[y] = input[y].substring(0, x) + 'L' + input[y].substring(x + 1);
@@ -251,6 +262,8 @@ function checkUnOccupiedTwo(checkY, checkX){
 
 function checkOccupiedTwo(checkY, checkX){
     var counter = 0;
+    
+    scenarioChar = "";
     scenarioDirectionX = -1;
     scenarioDirectionY = -1;
     
@@ -269,7 +282,7 @@ function checkOccupiedTwo(checkY, checkX){
         if (scenarioChar === "#"){counter++; break;}
         if (scenarioChar === "L"){break;}
     }
-    var counter = 0;
+    scenarioChar = "";
     scenarioDirectionX = -1;
     scenarioDirectionY = 0;
     
@@ -287,61 +300,8 @@ function checkOccupiedTwo(checkY, checkX){
         scenarioChar = output[scenarioY].charAt(scenarioX);
         if (scenarioChar === "#"){counter++; break;}
         if (scenarioChar === "L"){break;}
-    }    var counter = 0;
-    scenarioDirectionX = -1;
-    scenarioDirectionY = 1;
-    
-    scenarioX = checkX;
-    scenarioY = checkY;
-    flag =1;
-    while (flag = 1){
-        scenarioX += scenarioDirectionX;
-        scenarioY += scenarioDirectionY;
-    
-        if ((scenarioX < 0 ) || (scenarioX >= width) || (scenarioY < 0) || (scenarioY >= size)){
-            //console.log("Hit Boundary" , scenarioY , scenarioX);
-            break;
-        }
-        scenarioChar = output[scenarioY].charAt(scenarioX);
-        if (scenarioChar === "#"){counter++; break;}
-        if (scenarioChar === "L"){break;}
-    }    var counter = 0;
-    scenarioDirectionX = -1;
-    scenarioDirectionY = 0;
-    
-    scenarioX = checkX;
-    scenarioY = checkY;
-    flag =1;
-    while (flag = 1){
-        scenarioX += scenarioDirectionX;
-        scenarioY += scenarioDirectionY;
-    
-        if ((scenarioX < 0 ) || (scenarioX >= width) || (scenarioY < 0) || (scenarioY >= size)){
-            //console.log("Hit Boundary" , scenarioY , scenarioX);
-            break;
-        }
-        scenarioChar = output[scenarioY].charAt(scenarioX);
-        if (scenarioChar === "#"){counter++; break;}
-        if (scenarioChar === "L"){break;}
-    }    var counter = 0;
-    scenarioDirectionX = 1;
-    scenarioDirectionY = 0;
-    
-    scenarioX = checkX;
-    scenarioY = checkY;
-    flag =1;
-    while (flag = 1){
-        scenarioX += scenarioDirectionX;
-        scenarioY += scenarioDirectionY;
-    
-        if ((scenarioX < 0 ) || (scenarioX >= width) || (scenarioY < 0) || (scenarioY >= size)){
-            //console.log("Hit Boundary" , scenarioY , scenarioX);
-            break;
-        }
-        scenarioChar = output[scenarioY].charAt(scenarioX);
-        if (scenarioChar === "#"){counter++; break;}
-        if (scenarioChar === "L"){break;}
-    }    var counter = 0;
+    }    
+    scenarioChar = "";
     scenarioDirectionX = -1;
     scenarioDirectionY = 1;
     
@@ -359,7 +319,27 @@ function checkOccupiedTwo(checkY, checkX){
         scenarioChar = output[scenarioY].charAt(scenarioX);
         if (scenarioChar === "#"){counter++; break;}
         if (scenarioChar === "L"){break;}
-    }    var counter = 0;
+    }    
+    scenarioChar = "";
+    scenarioDirectionX = -1;
+    scenarioDirectionY = 0;
+    
+    scenarioX = checkX;
+    scenarioY = checkY;
+    flag =1;
+    while (flag = 1){
+        scenarioX += scenarioDirectionX;
+        scenarioY += scenarioDirectionY;
+    
+        if ((scenarioX < 0 ) || (scenarioX >= width) || (scenarioY < 0) || (scenarioY >= size)){
+            //console.log("Hit Boundary" , scenarioY , scenarioX);
+            break;
+        }
+        scenarioChar = output[scenarioY].charAt(scenarioX);
+        if (scenarioChar === "#"){counter++; break;}
+        if (scenarioChar === "L"){break;}
+    }    
+    scenarioChar = "";
     scenarioDirectionX = 1;
     scenarioDirectionY = 0;
     
@@ -377,7 +357,46 @@ function checkOccupiedTwo(checkY, checkX){
         scenarioChar = output[scenarioY].charAt(scenarioX);
         if (scenarioChar === "#"){counter++; break;}
         if (scenarioChar === "L"){break;}
-    }    var counter = 0;
+    }    
+    scenarioChar = "";
+    scenarioDirectionX = -1;
+    scenarioDirectionY = 1;
+    
+    scenarioX = checkX;
+    scenarioY = checkY;
+    flag =1;
+    while (flag = 1){
+        scenarioX += scenarioDirectionX;
+        scenarioY += scenarioDirectionY;
+    
+        if ((scenarioX < 0 ) || (scenarioX >= width) || (scenarioY < 0) || (scenarioY >= size)){
+            //console.log("Hit Boundary" , scenarioY , scenarioX);
+            break;
+        }
+        scenarioChar = output[scenarioY].charAt(scenarioX);
+        if (scenarioChar === "#"){counter++; break;}
+        if (scenarioChar === "L"){break;}
+    }    
+    scenarioChar = "";
+    scenarioDirectionX = 1;
+    scenarioDirectionY = 0;
+    
+    scenarioX = checkX;
+    scenarioY = checkY;
+    flag =1;
+    while (flag = 1){
+        scenarioX += scenarioDirectionX;
+        scenarioY += scenarioDirectionY;
+    
+        if ((scenarioX < 0 ) || (scenarioX >= width) || (scenarioY < 0) || (scenarioY >= size)){
+            //console.log("Hit Boundary" , scenarioY , scenarioX);
+            break;
+        }
+        scenarioChar = output[scenarioY].charAt(scenarioX);
+        if (scenarioChar === "#"){counter++; break;}
+        if (scenarioChar === "L"){break;}
+    }    
+    scenarioChar = "";
     scenarioDirectionX = 1;
     scenarioDirectionY = 1;
     
@@ -402,7 +421,7 @@ function checkOccupiedTwo(checkY, checkX){
  
 
 
-    if ((counter === 0 )&& (input[y].charAt(x) === 'L')){
+    if ((counter === 0 )&& (input[y].charAt(x) != '.')){
         //console.log("STAND UP AT " + y,x,input[y].charAt(x));
  
         input[y] = input[y].substring(0, x) + '#' + input[y].substring(x + 1);
@@ -641,3 +660,4 @@ function checkAround(localY, localX){
 
 
 // part 1 answer is 2321
+// part 2 105 is too low
