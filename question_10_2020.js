@@ -145,4 +145,4 @@ function cleanUp(){
 }
 
 // part 1 = 2040
-// part 2 268959745 is too low
+// part 2 28346956187648
