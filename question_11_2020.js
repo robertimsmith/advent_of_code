@@ -14,8 +14,8 @@ console.log(width, size);
 main2();
 
 function main2(){
-    flag = 1;
-    while(flag ==1) {
+    flagLoop = 1;
+    while(flagLoop ==1) {
     for (y = 0; y < size; y++){
         for (x = 0; x < width; x++){         
             checkOccupiedTwo(y, x);
@@ -64,7 +64,7 @@ function main2(){
 
     if (changes === 0){
         //console.log("NO CHANGE");
-        flag = 0;
+        flagLoop = 0;
     }else console.log("CHANGES = " + changes);
 
     countStand = 0;
@@ -92,8 +92,8 @@ function checkUnOccupiedTwo(checkY, checkX){
     scenarioDirectionY = -1;
     scenarioX = checkX;
     scenarioY = checkY;
-    flag =1;
-    while (flag = 1){
+    flag = 1;
+    while (flag == 1){
         scenarioX += scenarioDirectionX;
         scenarioY += scenarioDirectionY;
     
@@ -102,8 +102,8 @@ function checkUnOccupiedTwo(checkY, checkX){
             break;
         }
         scenarioChar = output[scenarioY].charAt(scenarioX);
-        if (scenarioChar === "#"){counter++; break;}
-        if (scenarioChar === "L"){break;}
+        if (scenarioChar === "#"){counter++; flag = 0; break;}
+        if (scenarioChar === "L"){flag = 0; break;}
     }
     scenarioChar = "";
     scenarioDirectionX = -1;
@@ -111,7 +111,7 @@ function checkUnOccupiedTwo(checkY, checkX){
     scenarioX = checkX;
     scenarioY = checkY;
     flag =1;
-    while (flag = 1){
+    while (flag == 1){
         scenarioX += scenarioDirectionX;
         scenarioY += scenarioDirectionY;
     
@@ -120,8 +120,8 @@ function checkUnOccupiedTwo(checkY, checkX){
             break;
         }
         scenarioChar = output[scenarioY].charAt(scenarioX);
-        if (scenarioChar === "#"){counter++; break;}
-        if (scenarioChar === "L"){break;}
+        if (scenarioChar === "#"){counter++; flag = 0; break;}
+        if (scenarioChar === "L"){flag = 0; break;}
     } 
     
     scenarioChar = "";
@@ -131,7 +131,7 @@ function checkUnOccupiedTwo(checkY, checkX){
     scenarioX = checkX;
     scenarioY = checkY;
     flag =1;
-    while (flag = 1){
+    while (flag == 1){
         scenarioX += scenarioDirectionX;
         scenarioY += scenarioDirectionY;
     
@@ -140,8 +140,8 @@ function checkUnOccupiedTwo(checkY, checkX){
             break;
         }
         scenarioChar = output[scenarioY].charAt(scenarioX);
-        if (scenarioChar === "#"){counter++; break;}
-        if (scenarioChar === "L"){break;}
+        if (scenarioChar === "#"){counter++; flag = 0; break;}
+        if (scenarioChar === "L"){flag = 0; break;}
     } 
     
     scenarioChar = "";
@@ -151,7 +151,7 @@ function checkUnOccupiedTwo(checkY, checkX){
     scenarioX = checkX;
     scenarioY = checkY;
     flag =1;
-    while (flag = 1){
+    while (flag == 1){
         scenarioX += scenarioDirectionX;
         scenarioY += scenarioDirectionY;
     
@@ -160,8 +160,8 @@ function checkUnOccupiedTwo(checkY, checkX){
             break;
         }
         scenarioChar = output[scenarioY].charAt(scenarioX);
-        if (scenarioChar === "#"){counter++; break;}
-        if (scenarioChar === "L"){break;}
+        if (scenarioChar === "#"){counter++; flag = 0; break;}
+        if (scenarioChar === "L"){flag = 0; break;}
     }  
     
     scenarioChar = "";
@@ -171,7 +171,7 @@ function checkUnOccupiedTwo(checkY, checkX){
     scenarioX = checkX;
     scenarioY = checkY;
     flag =1;
-    while (flag = 1){
+    while (flag == 1){
         scenarioX += scenarioDirectionX;
         scenarioY += scenarioDirectionY;
     
@@ -180,8 +180,8 @@ function checkUnOccupiedTwo(checkY, checkX){
             break;
         }
         scenarioChar = output[scenarioY].charAt(scenarioX);
-        if (scenarioChar === "#"){counter++; break;}
-        if (scenarioChar === "L"){break;}
+        if (scenarioChar === "#"){counter++; flag = 0; break;}
+        if (scenarioChar === "L"){flag = 0; break;}
     } 
     
     scenarioChar = "";
@@ -191,7 +191,7 @@ function checkUnOccupiedTwo(checkY, checkX){
     scenarioX = checkX;
     scenarioY = checkY;
     flag =1;
-    while (flag = 1){
+    while (flag == 1){
         scenarioX += scenarioDirectionX;
         scenarioY += scenarioDirectionY;
     
@@ -200,8 +200,8 @@ function checkUnOccupiedTwo(checkY, checkX){
             break;
         }
         scenarioChar = output[scenarioY].charAt(scenarioX);
-        if (scenarioChar === "#"){counter++; break;}
-        if (scenarioChar === "L"){break;}
+        if (scenarioChar === "#"){counter++; flag = 0; break;}
+        if (scenarioChar === "L"){flag = 0; break;}
     }  
     
     scenarioChar = "";
@@ -211,7 +211,7 @@ function checkUnOccupiedTwo(checkY, checkX){
     scenarioX = checkX;
     scenarioY = checkY;
     flag =1;
-    while (flag = 1){
+    while (flag == 1){
         scenarioX += scenarioDirectionX;
         scenarioY += scenarioDirectionY;
     
@@ -220,8 +220,8 @@ function checkUnOccupiedTwo(checkY, checkX){
             break;
         }
         scenarioChar = output[scenarioY].charAt(scenarioX);
-        if (scenarioChar === "#"){counter++; break;}
-        if (scenarioChar === "L"){break;}
+        if (scenarioChar === "#"){counter++; flag = 0; break;}
+        if (scenarioChar === "L"){flag = 0; break;}
     } 
     
     scenarioChar = "";
@@ -231,7 +231,7 @@ function checkUnOccupiedTwo(checkY, checkX){
     scenarioX = checkX;
     scenarioY = checkY;
     flag =1;
-    while (flag = 1){
+    while (flag == 1){
         scenarioX += scenarioDirectionX;
         scenarioY += scenarioDirectionY;
     
@@ -240,8 +240,8 @@ function checkUnOccupiedTwo(checkY, checkX){
             break;
         }
         scenarioChar = output[scenarioY].charAt(scenarioX);
-        if (scenarioChar === "#"){counter++; break;}
-        if (scenarioChar === "L"){break;}
+        if (scenarioChar === "#"){counter++; flag = 0; break;}
+        if (scenarioChar === "L"){flag = 0; break;}
     }
 
 
@@ -270,7 +270,7 @@ function checkOccupiedTwo(checkY, checkX){
     scenarioX = checkX;
     scenarioY = checkY;
     flag =1;
-    while (flag = 1){
+    while (flag ==1){
         scenarioX += scenarioDirectionX;
         scenarioY += scenarioDirectionY;
     
@@ -279,8 +279,8 @@ function checkOccupiedTwo(checkY, checkX){
             break;
         }
         scenarioChar = output[scenarioY].charAt(scenarioX);
-        if (scenarioChar === "#"){counter++; break;}
-        if (scenarioChar === "L"){break;}
+        if (scenarioChar === "#"){counter++; flag = 0; break;}
+        if (scenarioChar === "L"){flag = 0; break;}
     }
     scenarioChar = "";
     scenarioDirectionX = -1;
@@ -289,7 +289,7 @@ function checkOccupiedTwo(checkY, checkX){
     scenarioX = checkX;
     scenarioY = checkY;
     flag =1;
-    while (flag = 1){
+    while (flag == 1){
         scenarioX += scenarioDirectionX;
         scenarioY += scenarioDirectionY;
     
@@ -298,8 +298,8 @@ function checkOccupiedTwo(checkY, checkX){
             break;
         }
         scenarioChar = output[scenarioY].charAt(scenarioX);
-        if (scenarioChar === "#"){counter++; break;}
-        if (scenarioChar === "L"){break;}
+        if (scenarioChar === "#"){counter++; flag = 0; break;}
+        if (scenarioChar === "L"){flag = 0; break;}
     }    
     scenarioChar = "";
     scenarioDirectionX = -1;
@@ -308,7 +308,7 @@ function checkOccupiedTwo(checkY, checkX){
     scenarioX = checkX;
     scenarioY = checkY;
     flag =1;
-    while (flag = 1){
+    while (flag == 1){
         scenarioX += scenarioDirectionX;
         scenarioY += scenarioDirectionY;
     
@@ -317,8 +317,8 @@ function checkOccupiedTwo(checkY, checkX){
             break;
         }
         scenarioChar = output[scenarioY].charAt(scenarioX);
-        if (scenarioChar === "#"){counter++; break;}
-        if (scenarioChar === "L"){break;}
+        if (scenarioChar === "#"){counter++; flag = 0; break;}
+        if (scenarioChar === "L"){flag = 0; break;}
     }    
     scenarioChar = "";
     scenarioDirectionX = -1;
@@ -327,7 +327,7 @@ function checkOccupiedTwo(checkY, checkX){
     scenarioX = checkX;
     scenarioY = checkY;
     flag =1;
-    while (flag = 1){
+    while (flag == 1){
         scenarioX += scenarioDirectionX;
         scenarioY += scenarioDirectionY;
     
@@ -336,8 +336,8 @@ function checkOccupiedTwo(checkY, checkX){
             break;
         }
         scenarioChar = output[scenarioY].charAt(scenarioX);
-        if (scenarioChar === "#"){counter++; break;}
-        if (scenarioChar === "L"){break;}
+        if (scenarioChar === "#"){counter++; flag = 0; break;}
+        if (scenarioChar === "L"){flag = 0; break;}
     }    
     scenarioChar = "";
     scenarioDirectionX = 1;
@@ -346,7 +346,7 @@ function checkOccupiedTwo(checkY, checkX){
     scenarioX = checkX;
     scenarioY = checkY;
     flag =1;
-    while (flag = 1){
+    while (flag == 1){
         scenarioX += scenarioDirectionX;
         scenarioY += scenarioDirectionY;
     
@@ -355,8 +355,8 @@ function checkOccupiedTwo(checkY, checkX){
             break;
         }
         scenarioChar = output[scenarioY].charAt(scenarioX);
-        if (scenarioChar === "#"){counter++; break;}
-        if (scenarioChar === "L"){break;}
+        if (scenarioChar === "#"){counter++; flag = 0; break;}
+        if (scenarioChar === "L"){flag = 0; break;}
     }    
     scenarioChar = "";
     scenarioDirectionX = -1;
@@ -365,7 +365,7 @@ function checkOccupiedTwo(checkY, checkX){
     scenarioX = checkX;
     scenarioY = checkY;
     flag =1;
-    while (flag = 1){
+    while (flag == 1){
         scenarioX += scenarioDirectionX;
         scenarioY += scenarioDirectionY;
     
@@ -374,8 +374,8 @@ function checkOccupiedTwo(checkY, checkX){
             break;
         }
         scenarioChar = output[scenarioY].charAt(scenarioX);
-        if (scenarioChar === "#"){counter++; break;}
-        if (scenarioChar === "L"){break;}
+        if (scenarioChar === "#"){counter++; flag = 0; break;}
+        if (scenarioChar === "L"){flag = 0; break;}
     }    
     scenarioChar = "";
     scenarioDirectionX = 1;
@@ -384,7 +384,7 @@ function checkOccupiedTwo(checkY, checkX){
     scenarioX = checkX;
     scenarioY = checkY;
     flag =1;
-    while (flag = 1){
+    while (flag == 1){
         scenarioX += scenarioDirectionX;
         scenarioY += scenarioDirectionY;
     
@@ -393,8 +393,8 @@ function checkOccupiedTwo(checkY, checkX){
             break;
         }
         scenarioChar = output[scenarioY].charAt(scenarioX);
-        if (scenarioChar === "#"){counter++; break;}
-        if (scenarioChar === "L"){break;}
+        if (scenarioChar === "#"){counter++; flag = 0; break;}
+        if (scenarioChar === "L"){flag = 0; break;}
     }    
     scenarioChar = "";
     scenarioDirectionX = 1;
@@ -402,7 +402,7 @@ function checkOccupiedTwo(checkY, checkX){
     
     scenarioX = checkX;
     scenarioY = checkY;
-    flag =1;
+    flag ==1;
     while (flag = 1){
         scenarioX += scenarioDirectionX;
         scenarioY += scenarioDirectionY;
@@ -412,8 +412,8 @@ function checkOccupiedTwo(checkY, checkX){
             break;
         }
         scenarioChar = output[scenarioY].charAt(scenarioX);
-        if (scenarioChar === "#"){counter++; break;}
-        if (scenarioChar === "L"){break;}
+        if (scenarioChar === "#"){counter++; flag = 0; break;}
+        if (scenarioChar === "L"){flag = 0; break;}
     }
 
 
