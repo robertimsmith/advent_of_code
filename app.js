@@ -1,18 +1,19 @@
-const { ok } = require("assert");
 var fs = require("fs");
-const { checkServerIdentity } = require("tls");
-const { string } = require("yargs");
 var text = fs.readFileSync("./input_2020_Q16_1.txt", "utf8");
 let validInput = text.split("\n");
 var text = fs.readFileSync("./input_2020_Q16_2.txt", "utf8");
 let yourTicketInput = text.split(",");
 var text = fs.readFileSync("./input_2020_Q16_3.txt", "utf8");
 let nearbyTicketInput = text.split("\n");
+//let nearbyTicketInput = ['7,3,47', '40,4,50', '55,2,20', '38,6,12'];
 var x = "";
 let pairedInt = new Array(validInput.length*2);
-let listOfValidInt = new Array(975);
+let listOfValidInt = new Array(1000);
 var OK = 0;
 var NotOK = 0;
+
+var errorRate = 0;
+
 for (i = 0; i < listOfValidInt.length; i++){
     listOfValidInt[i] = 0;
 }
@@ -29,11 +30,14 @@ function main(){
     
     let validInputResults = processValidInput();
     getInt(validInputResults);
-    console.log("\n" + listOfValidInt);
+    //console.log("\n" + listOfValidInt);
     processTicketInput();
+
+    //console.log(nearbyTicketInput);
     processNearbyTicketInput();
-    console.log("OK = " + OK + " NOT OK = " + NotOK);
-    console.log(NotOK/(OK+NotOK));
+    //console.log("OK = " + OK + " NOT OK = " + NotOK);
+    //console.log(NotOK/(OK+NotOK));
+    console.log("ERROR Rate = " + errorRate);
 }
 
 
@@ -42,40 +46,44 @@ function processTicketInput(){
     //console.log(nearbyTicketInput);
     
     for (i = 0; i < nearbyTicketInput.length; i++){
-        console.log(i, nearbyTicketInput[i]);
+        //console.log(i, nearbyTicketInput[i]);
         var stringsearch = ",";
         var count = 0;
-        str = nearbyTicketInput[i];
+        str = nearbyTicketInput[i]+ ",";
         for(var j=0; j<str.length; j++){
             if (stringsearch===str[j]){
                 count++;
             }
         }
-        console.log(count);
-        str = nearbyTicketInput[i];
-
+        //console.log("COUNT " + count);
+ 
         
         for (k = 0; k < count; k++){
             var flag = 1;
             //console.log(str);
             
             checkIntegerString = parseInt(str.substr(0, str.indexOf(",")));
-            console.log("CHECK INTEGERSTRING " + checkIntegerString, listOfValidInt[checkIntegerString]);
+            //console.log("CHECK INTEGERSTRING " + checkIntegerString, listOfValidInt[checkIntegerString]);
 
-            if (listOfValidInt[checkIntegerString] === 0){              
+            if (listOfValidInt[checkIntegerString] != 1){              
                 flag = 0;
-                console.log("NO MATCH!!!");
+                //console.log("NO MATCH!!!");
+                errorRate += checkIntegerString;
+                //console.log("adding " + checkIntegerString);
             }
             //console.log(k, checkIntegerString);
             str = str.substr(str.indexOf(",")+1);
             //console.log(k, str);
         }
+
         if (flag===1){
-            console.log("OK!!");
+            //console.log("OK!!");
             OK++;
         } else {
-            console.log("NO MATCH!!!");
-            NotOK++
+            //console.log("NO MATCH!!!");
+            NotOK++;
+            //errorRate += checkIntegerString;
+            console.log("adding " + checkIntegerString);
         }
     }
 
@@ -116,7 +124,7 @@ function getInt(validInputResults){
     var firstInt = 0;
     var secondInt = 0;
     var maxInt = 0;
-
+    console.log(validInputResults.length);
     for ( i = 0; i < validInputResults.length; i++){
         //console.log(validInputResults[i]);
         firstPairString = validInputResults[i].substr(0, validInputResults[i].indexOf(";"));
@@ -131,23 +139,23 @@ function getInt(validInputResults){
         if (secondInt > maxInt){ maxInt = secondInt};
         //console.log(validInputResults[i]);
         firstPairString = validInputResults[i].substr(validInputResults[i].indexOf(";")+1);
-        //console.log("FIRSTPAIRSTRING " + firstPairString + " INT " + firstPairString.substr(0, firstPairString.indexOf("-")) + " index of  " + firstPairString.indexOf("-"));
+        console.log("FIRSTPAIRSTRING " + firstPairString + " INT " + firstPairString.substr(0, firstPairString.indexOf("-")) + " index of  " + firstPairString.indexOf("-"));
         pairedInt.push(firstInt);
         pairedInt.push(secondInt);
  
-        for (i = firstInt; i < secondInt; i++){
-            listOfValidInt[i] = 1;
+        for (l = firstInt; l <= secondInt; l++){
+            listOfValidInt[l] = 1;
             //console.log(i, firstInt, secondInt);
         }
 
         firstInt = parseInt(firstPairString.substr(0, firstPairString.indexOf("-")));
         secondInt = parseInt(firstPairString.substr(firstPairString.indexOf("-")+1));
-        //console.log("first " + firstInt + " 2nd "  + secondInt);
+        console.log("first " + firstInt + " 2nd "  + secondInt);
         if (firstInt > maxInt) { maxInt = firstInt};
         if (secondInt > maxInt){ maxInt = secondInt};
 
-        for (i = firstInt; i <= secondInt; i++){
-            listOfValidInt[i] = 1;
+        for (l = firstInt; l <= secondInt; l++){
+            listOfValidInt[l] = 1;
             //console.log(i, firstInt, secondInt);
         }
     }
@@ -162,3 +170,7 @@ function getInt(validInputResults){
 function processNearbyTicketInput(){
 
 }
+
+//part 1 is 26053
+
+
